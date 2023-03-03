@@ -25,17 +25,37 @@ namespace CSharpConsole.Samples.SOLID
             _logger = logger;
         }
 
+        public ILogger Logger{ get { return _logger; } set { _logger = value; }  }
+
+        public void Initilize(ILogger logger)
+        {
+            _logger = logger;
+        }
+
         public void AddNewElement(ICollection<string> collection)
         {
-            var element = "NewElement";
-            collection.Add(element);
+            try
+            {
+                var element = "NewElement";
+                collection.Add(element);
 
-            _logger.LogDebug($"Element: {element} added to the collection");
+                _logger.LogDebug($"Element: {element} added to the collection");
+            }
+            catch (Exception)
+            {
+                _logger.LogError($"Element not added to the collection");
+            }
+
         }
     }
 
     public class DbLogger : ILogger
     {
+        public string GetError()
+        {
+            throw new NotImplementedException();
+        }
+
         public void LogDebug(string msg)
         {
             throw new NotImplementedException();
@@ -68,6 +88,11 @@ namespace CSharpConsole.Samples.SOLID
         {
             Console.WriteLine($"DEBUG - {msg}");
         }
+
+        public string GetError()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public interface ILogger
@@ -75,5 +100,6 @@ namespace CSharpConsole.Samples.SOLID
         void LogDebug(string msg);
         void LogWarning(string msg);
         void LogError(string msg);
+        string GetError();
     }
 }

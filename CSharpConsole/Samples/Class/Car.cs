@@ -1,4 +1,5 @@
 ﻿using CSharpConsole.Samples.SOLID;
+using System;
 
 namespace CSharpConsole.Samples.Class
 {
@@ -13,6 +14,8 @@ namespace CSharpConsole.Samples.Class
         // Constructor
         public Car(int avgSpeed)
         {
+            if (avgSpeed < 0)
+                throw new ArgumentOutOfRangeException();
             //var car = new Car(100); initialization sample
             _speed = avgSpeed;
         }

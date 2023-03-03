@@ -39,11 +39,14 @@ namespace CSharpConsole.Samples.Threading.Threads
             {
                 lock (_lockedObject)
                 {
-                    _commonCounter++;
-                    _thread1Counter++;
-
+                    if (_commonCounter < 1000000)
+                    {
+                        _commonCounter++;
+                        _thread1Counter++;
+                    }
                 }
             }
+
         }
         private void Increment2()
         {
@@ -51,8 +54,11 @@ namespace CSharpConsole.Samples.Threading.Threads
             {
                 lock (_lockedObject)
                 {
-                    _commonCounter++;
-                    _thread2Counter++;
+                    if (_commonCounter < 1000000)
+                    {
+                        _commonCounter++;
+                        _thread2Counter++;
+                    }
                 }
             }
         }

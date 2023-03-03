@@ -22,7 +22,11 @@ namespace CSharpConsole.Samples.LINQ
             ret = operation.Invoke(a, b); //subtraction
             Console.WriteLine("Subtraction on {0} and {1} is {2}", a, b, ret);
 
-            operation = (x, y) => { Console.WriteLine("prod"); return x * y; }; //what about += events
+            operation = (x, y) => 
+            { 
+                Console.WriteLine("prod"); 
+                return x * y; 
+            }; //what about += events
             ret = operation.Invoke(a, b); //product
             Console.WriteLine("Product on {0} and {1} is {2}", a, b, ret);
 

@@ -46,7 +46,7 @@ namespace CSharpConsole.Samples.Threading.Parallels
                 //.AsParallel()
                 .OrderByDescending(n => n).ToArray();
             Console.WriteLine(
-                $"Found {modThreeIsZeroAsync.Count()} numbers asynchronously that match query in {stopwatch.ElapsedMilliseconds}ms!");
+                $"Found {modThreeIsZeroAsync.Count()} numbers parallely that match query in {stopwatch.ElapsedMilliseconds}ms!");
             stopwatch.Stop();
         }
     }
