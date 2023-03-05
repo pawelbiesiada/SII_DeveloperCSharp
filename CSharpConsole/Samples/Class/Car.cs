@@ -1,9 +1,10 @@
-﻿using CSharpConsole.Samples.SOLID;
+﻿using CSharpConsole.Samples.Class.Inheritance;
+using CSharpConsole.Samples.SOLID;
 using System;
 
 namespace CSharpConsole.Samples.Class
 {
-    public class Car
+    public class Car : ICar
     {
         //Constant Field
         private const int ServiceCheckAfter = 10_000;
@@ -18,7 +19,9 @@ namespace CSharpConsole.Samples.Class
                 throw new ArgumentOutOfRangeException();
             //var car = new Car(100); initialization sample
             _speed = avgSpeed;
+
         }
+
         public Car(int avgSpeed, ILogger logger)
         {
             //var car = new Car(100); initialization sample
@@ -26,12 +29,13 @@ namespace CSharpConsole.Samples.Class
         }
         // Properties
         public int Distance { get; set; }
-
+        public static int DistanceStatic { get; set; }
 
         // Methods
-        public void Drive(int duration)
+        public virtual void Drive(int duration)
         {
             Distance += CalculateDistance(_speed, duration);
+            DistanceStatic += CalculateDistance(_speed, duration);
         }
 
         public bool IsServiceCheckNeeded()
@@ -43,6 +47,7 @@ namespace CSharpConsole.Samples.Class
         {
             return speed * duration;
         }
+
     }
 
     public class ClassTest
@@ -54,6 +59,10 @@ namespace CSharpConsole.Samples.Class
             Car car3 = new Car(30);
 
             car.Drive(10);
+            car2.Drive(10);
+
+            var d = car2.Distance;
+            d = Car.DistanceStatic;
 
             var areEqual = car == car2; //false
             areEqual = car == car3; //false
@@ -76,17 +85,44 @@ namespace CSharpConsole.Samples.Class
             ModifyAndInitializeClass(car);
             areEqual = car.Distance == 200; // true
             areEqual = car.Distance == 300; // false
+            var num = 6;
+            var a = num;
+
+            num = 5;
+
+
+            var str1 = "Pawel";
+           
+            var str2 = str1;
+
+            str1 = "Piotr";
+
+            Console.WriteLine(str1);
+            Console.WriteLine(str2);
+
+
+
+            Console.WriteLine(a);
+
+            modifyInt(num);
+            Console.WriteLine(num);
+
         }
 
-        public static void ModifyClass(Car car)
+        public static void ModifyClass(Car carInMethod)
         {
-            car.Distance = 100;
+            carInMethod.Distance = 100;
         }
 
-        public static void ModifyAndInitializeClass(Car car)
+        public static void ModifyAndInitializeClass(Car carInMethod)
         {
-            car.Distance = 200;
-            car = new Car(300);
+            carInMethod.Distance = 200;
+            carInMethod = new Car(300);
+        }
+
+        public static void modifyInt(int number)
+        {
+            number = 100;
         }
     }
 }

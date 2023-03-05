@@ -72,6 +72,13 @@ namespace CSharpConsole.Samples.Class.Inheritance
             if (speed < 250)
                 throw new ArgumentException($"Speed cannot be lower than 250, actual: {speed}");
         }
+
+        public override void Drive(int duration)
+        {
+            base.Drive(duration);
+
+            Console.WriteLine(duration);
+        }
     }
 
     public sealed class Bulldozer : Car
@@ -89,6 +96,7 @@ namespace CSharpConsole.Samples.Class.Inheritance
     class CarPresentation
     {
         public static void Main()
+        public static void Main(string[] args)
         {
             var luxury = new LuxurySportCar();
             luxury.Drive(2);
@@ -97,6 +105,27 @@ namespace CSharpConsole.Samples.Class.Inheritance
             var obj = new object();
 
             car = new FamilyCar(80);
+            //as
+            //is
+            //.GetType()
+
+            if(car is SportCar)
+            {
+                SportCar mysc = (SportCar)car;
+                mysc.DriveFast();
+            }
+
+            SportCar scar = car as SportCar;
+            if (scar != null)
+            {
+                scar.DriveFast();
+            }
+
+            if(car.GetType() == typeof(SportCar))
+            {
+                SportCar mysc = (SportCar)car;
+                mysc.DriveFast();
+            }
             ((FamilyCar)car).LoadTrunk(3);
 
             var fcar = new FamilyCar(80);
