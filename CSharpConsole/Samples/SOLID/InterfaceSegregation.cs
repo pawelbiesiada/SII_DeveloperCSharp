@@ -3,7 +3,7 @@
     internal interface IParser
     {
         string ParseWord(byte[] stream);
-        string ParseRdf(byte[] stream);
+        string ParsePdf(byte[] stream);
         string ParseJson(byte[] stream);
     }
 

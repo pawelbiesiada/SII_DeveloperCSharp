@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f8d12c9370d645d5899e31db5169a510" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="EFTestDbModel.Group" Width="1.5" PointX="5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFTestDbModel.UserGroup" Width="1.5" PointX="2.375" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFTestDbModel.User" Width="1.5" PointX="6.875" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="EFTestDbModel.FK_GroupId" ManuallyRouted="false" />
+        <AssociationConnector Association="EFTestDbModel.FK_UserId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EFTestDbModel.Permission" Width="1.5" PointX="7.875" PointY="1.125" />
+        <AssociationConnector Association="EFTestDbModel.GroupPermissions" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

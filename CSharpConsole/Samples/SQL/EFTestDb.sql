@@ -82,15 +82,39 @@ PRIMARY KEY CLUSTERED
 GO
 INSERT [dbo].[Groups] ([Id], [Name]) VALUES (1, N'Administrator')
 GO
-INSERT [dbo].[UserGroups] ([Id], [GroupId], [UserId]) VALUES (1, 1, 13)
+INSERT [dbo].[Groups] ([Id], [Name]) VALUES (2, N'Reader')
+GO
+INSERT [dbo].[Groups] ([Id], [Name]) VALUES (3, N'PowerUser')
+GO
+INSERT [dbo].[UserGroups] ([Id], [GroupId], [UserId]) VALUES (1, 1, 1)
+GO
+INSERT [dbo].[UserGroups] ([Id], [GroupId], [UserId]) VALUES (2, 2, 1)
+GO
+INSERT [dbo].[UserGroups] ([Id], [GroupId], [UserId]) VALUES (3, 2, 2)
+GO
+INSERT [dbo].[UserGroups] ([Id], [GroupId], [UserId]) VALUES (4, 2, 3)
+GO
+INSERT [dbo].[UserGroups] ([Id], [GroupId], [UserId]) VALUES (5, 3, 3)
+GO
+INSERT [dbo].[UserGroups] ([Id], [GroupId], [UserId]) VALUES (6, 3, 4)
+GO
+INSERT [dbo].[UserGroups] ([Id], [GroupId], [UserId]) VALUES (7, 2, 5)
+GO
+INSERT [dbo].[UserGroups] ([Id], [GroupId], [UserId]) VALUES (8, 3, 6)
 GO
 SET IDENTITY_INSERT [dbo].[Users] ON 
 GO
-INSERT [dbo].[Users] ([Id], [Name], [Password], [IsActive]) VALUES (13, N'John', N'Password', 1)
+INSERT [dbo].[Users] ([Id], [Name], [Password], [IsActive]) VALUES (1, N'John', N'Password', 1)
 GO
-INSERT [dbo].[Users] ([Id], [Name], [Password], [IsActive]) VALUES (14, N'Martin', N'qwerty', 0)
+INSERT [dbo].[Users] ([Id], [Name], [Password], [IsActive]) VALUES (2, N'Martin', N'qwerty', 0)
 GO
-INSERT [dbo].[Users] ([Id], [Name], [Password], [IsActive]) VALUES (15, N'Pawel', N'asdf', 1)
+INSERT [dbo].[Users] ([Id], [Name], [Password], [IsActive]) VALUES (3, N'Pawel', N'asdf', 1)
+GO
+INSERT [dbo].[Users] ([Id], [Name], [Password], [IsActive]) VALUES (4, N'Anna', N'pwd', 1)
+GO
+INSERT [dbo].[Users] ([Id], [Name], [Password], [IsActive]) VALUES (5, N'Joe', N'zxcVBNM', 1)
+GO
+INSERT [dbo].[Users] ([Id], [Name], [Password], [IsActive]) VALUES (6, N'Kimberly', N'secretPassword', 1)
 GO
 SET IDENTITY_INSERT [dbo].[Users] OFF
 GO

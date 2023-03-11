@@ -1,7 +1,18 @@
-﻿using System;
+﻿using CSharpConsole.Samples.Class.Inheritance;
+using System;
 
 namespace CSharpConsole.Samples.Class.Inheritance
 {
+    public class TrunkCapacityException : ApplicationException
+    {
+        public TrunkCapacityException(string message) : base(message) 
+        { }
+
+        public int TrunkCapacity { get; set; }
+        public int TriedToLoad { get; set; }
+    }
+
+
     public class FamilyCar : Car
     {
         protected int TrunkCapacityLeft;
@@ -27,7 +38,12 @@ namespace CSharpConsole.Samples.Class.Inheritance
 
             if (load > TrunkCapacityLeft)
             {
-                throw new ApplicationException("The given load exceeds available trunk capacity"); 
+                throw new TrunkCapacityException("Tried to load too much")
+                {
+                    TrunkCapacity = this.TrunkCapacity,
+                    TriedToLoad = load
+                };
+                //throw new ApplicationException("The given load exceeds available trunk capacity"); 
                 //you can create our own exception type here
             }
 
@@ -95,9 +111,25 @@ namespace CSharpConsole.Samples.Class.Inheritance
 
     class CarPresentation
     {
-        public static void Main()
         public static void Main(string[] args)
         {
+            //testing TrunkCapacityException
+            var famCar = new FamilyCar(10);
+            try
+            {
+                famCar.LoadTrunk(150);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+                var tce = ex as TrunkCapacityException;
+                if (tce != null)
+                {
+                    Console.WriteLine($"Trunk capacity was: {tce.TrunkCapacity} and tried to load: {tce.TriedToLoad}");
+                }
+            }
+
             var luxury = new LuxurySportCar();
             luxury.Drive(2);
             Car car = new Car(90);
