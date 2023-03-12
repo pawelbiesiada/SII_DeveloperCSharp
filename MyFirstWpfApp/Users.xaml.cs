@@ -27,12 +27,48 @@ namespace MyFirstWpfApp
 
         private void cbxUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var cbx = sender as ComboBox;
+            if (cbx is null)
+                return;
 
+            var selectedElement = (User)cbx.SelectedItem;
+
+            grdUsers.SelectedItem = selectedElement;
+
+            txtId.Text = selectedElement.Id.ToString();
+            txtName.Text = selectedElement.Name;
+            txtIsActive.Text = selectedElement.IsActive.ToString();
+            txtPassword.Text = selectedElement.Password;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            cbxUsers.ItemsSource = CreateCollection.GetUsers().Where(u => u is not null).ToArray();
+            var users = CreateCollection.GetUsers()
+                .Where(u => u is not null)
+                .OrderBy(u => u.Id)
+                .ToArray();
+
+            cbxUsers.ItemsSource = users;
+            grdUsers.ItemsSource = users;
+
+
+            cbxUsers.SelectedItem = cbxUsers.ItemsSource.OfType<User>().FirstOrDefault();
+        }
+
+        private void btnTest_Click(object sender, RoutedEventArgs e)
+        {
+            var testMainView = new MainWindow();
+            testMainView.ShowDialog();
+
+            if(!string.IsNullOrEmpty(testMainView.SelectedName))
+            {
+                MessageBox.Show(testMainView.SelectedName);
+            }
+        }
+
+        private void grdUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cbxUsers.SelectedItem = grdUsers.SelectedItem;
         }
     }
 }

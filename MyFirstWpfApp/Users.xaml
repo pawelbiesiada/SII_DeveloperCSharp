@@ -10,19 +10,30 @@
         <ComboBox x:Name="cbxUsers" HorizontalAlignment="Left" Margin="65,29,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbxUsers_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock>
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="{}{0} : {1}">
-                                <Binding Path="Id"/>
-                                <Binding Path="Name"/>
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="=>" Foreground="Red"/>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} : {1}">
+                                    <Binding Path="Id"/>
+                                    <Binding Path="Name"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
         <TextBlock HorizontalAlignment="Left" Margin="65,106,0,0" TextWrapping="Wrap" Text="Id" VerticalAlignment="Top" Width="69"/>
         <TextBox x:Name="txtId" HorizontalAlignment="Left" Margin="209,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="65,138,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="65,171,0,0" TextWrapping="Wrap" Text="IsActive" VerticalAlignment="Top" RenderTransformOrigin="-0.609,-0.561"/>
+        <TextBlock HorizontalAlignment="Left" Margin="65,204,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" RenderTransformOrigin="-0.609,-0.561"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Margin="209,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtIsActive" HorizontalAlignment="Left" Margin="209,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="209,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnTest" Content="Test View" HorizontalAlignment="Left" Margin="41,345,0,0" VerticalAlignment="Top" Click="btnTest_Click"/>
+        <DataGrid x:Name="grdUsers"  Margin="356,40,10,123" SelectionChanged="grdUsers_SelectionChanged"/>
 
     </Grid>
 </Window>

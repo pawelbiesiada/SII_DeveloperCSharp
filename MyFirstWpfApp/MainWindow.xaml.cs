@@ -22,6 +22,24 @@ namespace MyFirstWpfApp
     {
         private string[] _names = new[] { "John", "Joe", "Peter", "Matt" }; 
 
+
+        public string SelectedName 
+        { 
+            get 
+            {
+                if(cbxNames != null && cbxNames.SelectedItem != null && cbxNames.Items.Contains("")) // => OK
+                //if (cbxNames.SelectedItem != null && cbxNames != null) // => NOT OK
+                {
+                    return cbxNames.SelectedItem.ToString() ?? "";  // ?? -> null coalescing
+                }
+
+
+                return cbxNames?.SelectedItem?.ToString() ?? "";   // ? -> null propagator
+            } 
+        }
+
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -33,20 +51,16 @@ namespace MyFirstWpfApp
         {
             txtContent.Text += txtDescrption.Text + Environment.NewLine;
         }
-        private static int fps = 0;
         private void Window_MouseMove(object sender, MouseEventArgs e)
         {
             var position = e.GetPosition(this);
             txtPosition.Text = $"({position.X},{position.Y})";
-
-      
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             cbxNames.ItemsSource = _names;
             cbxNames.SelectedItem = _names[0];
-            cbxNames.DisplayMemberPath = "Name";
             
         }
 
@@ -54,6 +68,20 @@ namespace MyFirstWpfApp
         {
             var name = (string)cbxNames.SelectedItem;
             txtContent.Text += name + Environment.NewLine;
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            //save
+
+            //configure
+
+            Close();
+        }
+
+        private void btnClose_Click(object sender, object e)
+        {
+
         }
     }
 }

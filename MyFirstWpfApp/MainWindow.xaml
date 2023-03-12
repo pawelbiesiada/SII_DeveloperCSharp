@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyFirstWpfApp"
         mc:Ignorable="d"
-        Title="My Wpf App" Height="350" Width="500" Background="LightBlue" MouseMove="Window_MouseMove" Loaded="Window_Loaded">
+        Title="My Wpf App" Height="350" Width="500" Background="LightBlue" MouseMove="Window_MouseMove" Loaded="Window_Loaded" WindowStyle="None">
     <Canvas>
         <TextBox x:Name="txtDescrption" Canvas.Left="45" TextWrapping="Wrap" Text="Hi There!!!" Canvas.Top="39" Width="304" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBox x:Name="txtContent" Canvas.Left="45" TextWrapping="Wrap" Canvas.Top="71" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" Height="151" VerticalScrollBarVisibility="Auto"/>
@@ -13,6 +13,7 @@
         <TextBlock Canvas.Left="105" TextWrapping="Wrap" Text="Mouse position:" Canvas.Top="10"/>
         <TextBlock x:Name="txtPosition" Canvas.Left="198" TextWrapping="Wrap" Canvas.Top="10"/>
         <ComboBox x:Name="cbxNames" Canvas.Left="197" Canvas.Top="114" Width="120" SelectionChanged="cbxNames_SelectionChanged"/>
+        <Button x:Name="btnClose" Content="Close" Canvas.Left="405" Canvas.Top="230" RenderTransformOrigin="-0.101,-0.399" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnClose_Click"/>
 
     </Canvas>
 </Window>
