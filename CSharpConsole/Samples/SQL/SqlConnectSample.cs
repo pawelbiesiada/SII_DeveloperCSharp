@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CSharpConsole.Exercises;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -53,6 +55,7 @@ namespace CSharpConsole.Samples.SQL
                 return;
             }
 
+            //var oracleConn = new OracleConnection();
             try
             {
                 using (var connection = new SqlConnection(connStr))
@@ -61,15 +64,29 @@ namespace CSharpConsole.Samples.SQL
 
                     var command = connection.CreateCommand();
                     command.CommandText = "SELECT * FROM  Users";
-
                     var reader = command.ExecuteReader();
+                    //command.ExecuteNonQuery();
+                    //command.ExecuteScalar();
 
+                    var users = new List<User>();
                     while (reader.Read())
                     {
+                        users.Add(new User
+                        {
+                            Id = (int)reader["Id"]
+                        });
+                        //var idCol = reader.GetInt32("Id");                       
                         var idCol = (int)reader["Id"];
                         var nameCol = (string)reader["Name"];
                         Console.WriteLine($"{idCol} : {nameCol}");
                     }
+
+                    var usersCount = users.Count;
+
+                    command = connection.CreateCommand();
+                    command.CommandText = "SELECT Count(*) FROM  Users";
+                    var countUser = (int)command.ExecuteScalar();
+
                 }
             }
             catch (Exception e)
@@ -156,5 +173,70 @@ namespace CSharpConsole.Samples.SQL
             }
         }
 
+        public List<int> GetInactiveUsers()
+        {
+            var connStr = _connectionStringProvider.GetConnectionSting();
+            if (string.IsNullOrEmpty(connStr))
+            {
+                return null;
+            }
+
+            try
+            {
+                using (var connection = new SqlConnection(connStr))
+                {
+                    connection.Open();
+
+                    var command = connection.CreateCommand();
+                    command.CommandText = "SELECT * FROM  Users WHERE IsActive = 0";
+                    List<int> inactiveUsers = new List<int>();
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        int idCol = (int)reader["Id"];
+                        var nameCol = reader.GetString("Name");
+                        inactiveUsers.Add(idCol);
+                        Console.WriteLine($"{idCol} {nameCol}");
+                    }
+
+                    return inactiveUsers;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
+        public void RemoveUsers(List<int> users)
+        {
+            var connStr = _connectionStringProvider.GetConnectionSting();
+            if (string.IsNullOrEmpty(connStr))
+            {
+                return;
+            }
+
+            try
+            {
+                using (var connection = new SqlConnection(connStr))
+                {
+                    connection.Open();
+
+
+                    var command = connection.CreateCommand();
+                    var ids = string.Join(',', users);
+
+                    command.CommandText = $"DELETE FROM Users WHERE Id IN ({ids}) ";
+                    var reader = command.ExecuteNonQuery();
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
     }
 }

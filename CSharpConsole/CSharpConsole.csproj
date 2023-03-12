@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <StartupObject>CSharpConsole.Samples.Class.Inheritance.CarPresentation</StartupObject>
+    <StartupObject>CSharpConsole.Samples.SQL.SqlConnectSample</StartupObject>
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <Authors>$(AssemblyName)</Authors>
